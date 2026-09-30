@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>icrea — Workspace para SEOs y Creadores</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================================
+           PARTE 2: ESTILOS CSS
+           ========================================== */
+        :root {
+            --bg-main: #f8fafc;
+            --bg-sidebar: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #6366f1;
+            --primary-light: #e0e7ff;
+            --accent: #f43f5e;
+            --border: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --transition: all 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR */
+        aside {
+            width: 260px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 24px 16px;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 8px 20px 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: var(--radius-md);
+            color: var(--text-muted);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--primary-light);
+            color: var(--primary);
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin: 20px 8px 8px 8px;
+            font-weight: 700;
+        }
+
+        /* MAIN CONTENT AREA */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        header {
+            height: 70px;
+            background: var(--bg-sidebar);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 8px 16px;
+            width: 320px;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 0.9rem;
+            width: 100%;
+            color: var(--text-main);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* VIEWS CONTAINER */
+        .content-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 32px;
+            position: relative;
+        }
+
+        .view-section {
+            display: none;
+        }
+
+        .view-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADERS DE VISTAS */
+        .view-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .view-title h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .view-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* PINTEREST / IDEAS GRID */
+        .pinterest-grid {
+            column-count: 3;
+            column-gap: 20px;
+        }
+
+        @media(max-width: 1200px) {
+            .pinterest-grid { column-count: 2; }
+        }
+        @media(max-width: 768px) {
+            .pinterest-grid { column-count: 1; }
+        }
+
+        .pin-card {
+            break-inside: avoid;
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pin-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .pin-media {
+            width: 100%;
+            height: 160px;
+            background: #e2e8f0;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .pin-content {
+            padding: 16px;
+        }
+
+        .pin-tag {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+
+        .pin-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .pin-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* CLIENTS / FOLDERS GRID */
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .folder-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .folder-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .folder-icon-wrap {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+        }
+
+        .folder-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .folder-meta {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* COLOR PALETTES */
+        .palettes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .palette-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .palette-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+        }
+
+        .palette-colors {
+            display: flex;
+            height: 70px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+        }
+
+        .color-swatch {
+            flex-grow: 1;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .color-swatch:hover {
+            flex-grow: 1.5;
+        }
+
+        /* NOTAS / NOTION STYLE */
+        .notes-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .note-card {
+            background: #fffbeb;
+            border: 1px solid #fef3c7;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
+        }
+
+        .note-card textarea {
+            background: transparent;
+            border: none;
+            outline: none;
+            resize: none;
+            width: 100%;
+            height: 100px;
+            font-size: 0.95rem;
+            color: #78350f;
+        }
+
+        .note-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: #b45309;
+            border-top: 1px solid #fde68a;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        /* CALENDARIO */
+        .calendar-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .cal-header-day {
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            padding-bottom: 10px;
+        }
+
+        .cal-day {
+            min-height: 90px;
+            background: var(--bg-main);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .cal-day-num {
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .cal-event {
+            background: var(--primary-light);
+            color: var(--primary);
+            padding: 4px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(4px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal-box {
+            background: var(--bg-sidebar);
+            width: 450px;
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            outline: none;
+            font-size: 0.9rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside>
+        <div>
+            <div class="logo-area">
+                <div class="logo-icon">i</div>
+                <div class="logo-text">icrea</div>
+            </div>
+            
+            <div class="section-menu">
+                <div class="section-title">Workspace</div>
+                <div class="nav-menu">
+                    <a class="nav-item active" onclick="switchView('ideas', this)">
+                        <i class="fa-solid fa-lightbulb"></i> Ideas (Pinterest)
+                    </a>
+                    <a class="nav-item" onclick="switchView('clients', this)">
+                        <i class="fa-solid fa-folder-open"></i> Clientes / Carpetas
+                    </a>
+                    <a class="nav-item" onclick="switchView('palettes', this)">
+                        <i class="fa-solid fa-palette"></i> Paletas de Colores
+                    </a>
+                    <a class="nav-item" onclick="switchView('calendar', this)">
+                        <i class="fa-solid fa-calendar-days"></i> Calendario SEO
+                    </a>
+                    <a class="nav-item" onclick="switchView('notes', this)">
+                        <i class="fa-solid fa-note-sticky"></i> Notas Rápidas
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; padding-top: 16px; border-top: 1px solid var(--border);">
+            v1.0.0 — icrea pro
+        </div>
+    </aside>
+
+    <!-- MAIN APP CONTAINER -->
+    <main>
+        <header>
+            <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+                <input type="text" placeholder="Buscar ideas, clientes o notas...">
+            </div>
+            <div class="user-profile">
+                <div style="text-align: right;">
+                    <div style="font-size: 0.9rem; font-weight: 600;">SEO Creator</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">Plan Pro</div>
+                </div>
+                <div class="avatar">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
+                </div>
+            </div>
+        </header>
+
+        <div class="content-body">
+            
+            <!-- VISTA 1: IDEAS (PINTEREST STYLE) -->
+            <section id="view-ideas" class="view-section active">
+                <div class="view-header">
+                    <div class="view-title">
+                        <h1>Banco de Ideas SEO & Contenido</h1>
+                        <p>Inspiración visual al estilo Pinterest para tus próximas campañas.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('idea')">
+                        <i class="fa-solid fa-plus"></i> Nueva Idea
+                    </button>
+                </div>
+
+                <div class="pinterest-grid" id="ideas-grid">
+                    <!-- Cards inyectadas por JS -->
+                </div>
+            </section>
+
+            <!-- VISTA 2: CLIENTES / CARPETAS -->
+            <section id="view-clients" class="view-section">
+                <div class="view-header">
+                    <div class="view-title">
+                        <h1>Carpetas de Clientes</h1>
+                        <p>Organiza estrategias, keywords y auditorías por cada marca.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('client')">
+                        <i class="fa-solid fa-folder-plus"></i> Nuevo Cliente
+                    </button>
+                </div>
+
+                <div class="folders-grid" id="folders-grid">
+                    <!-- Carpetas inyectadas por JS -->
+                </div>
+            </section>
+
+            <!-- VISTA 3: PALETAS DE COLORES -->
+            <section id="view-palettes" class="view-section">
+                <div class="view-header">
+                    <div class="view-title">
+                        <h1>Paletas de Colores</h1>
+                        <p>Guías visuales de identidad de marca para diseño y creatividades.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('palette')">
+                        <i class="fa-solid fa-plus"></i> Agregar Paleta
+                    </button>
+                </div>
+
+                <div class="palettes-grid" id="palettes-grid">
+                    <!-- Paletas inyectadas por JS -->
+                </div>
+            </section>
+
+            <!-- VISTA 4: CALENDARIO -->
+            <section id="view-calendar" class="view-section">
+                <div class="view-header">
+                    <div class="view-title">
+                        <h1>Calendario Editorial & SEO</h1>
+                        <p>Planificación mensual de publicaciones y auditorías técnicas.</p>
+                    </div>
+                    <button class="btn-primary" onclick="openModal('event')">
+                        <i class="fa-solid fa-calendar-plus"></i> Programar Cita
+                    </button>
+                </div>
+
+                <div class="calendar-wrapper">
+                    <div style="font-weight: 700; font-size: 1.1rem;">Octubre 2026</div>
+                    <div class="calendar-grid">
+                        <div class="cal-header-day">Lun</div>
+                        <div class="cal-header-day">Mar</div>
+                        <div class="cal-header-day">Mié</div>
+                        <div class="cal-header-day">Jue</div>
+                        <div class="cal-header-day">Vie</div>
+                        <div class="cal-header-day">Sáb</div>
+                        <div class="cal-header-day">Dom</div>
+                        
+                        <!-- Días del mes simulados -->
+                        <div class="cal-day"><span class="cal-day-num">1</span></div>
+                        <div class="cal-day"><span class="cal-day-num">2</span></div>
+                        <div class="cal-day"><span class="cal-day-num">3</span><div class="cal-event">Auditoría SEO</div></div>
+                        <div class="cal-day"><span class="cal-day-num">4</span></div>
+                        <div class="cal-day"><span class="cal-day-num">5</span></div>
+                        <div class="cal-day"><span class="cal-day-num">6</span></div>
+                        <div class="cal-day"><span class="cal-day-num">7</span></div>
+                        <div class="cal-day"><span class="cal-day-num">8</span><div class="cal-event">Post Reel IG</div></div>
+                        <div class="cal-day"><span class="cal-day-num">9</span></div>
+                        <div class="cal-day"><span class="cal-day-num">10</span></div>
+                        <div class="cal-day"><span class="cal-day-num">11</span></div>
+                        <div class="cal-day"><span class="cal-day-num">12</span></div>
+                        <div class="cal-day"><span class="cal-day-num">13</span><div class="cal-event">Keyword Research</div></div>
+                        <div class="cal-day"><span class="cal-day-num">14</span></div>
+                        <!-- Relleno simulación limpio -->
+                        <div class="cal-day"><span class="cal-day-num">15</span></div>
+                        <div class="cal-day"><span class="cal-day-num">16</span></div>
+                        <div class="cal-day"><span class="cal-day-num">17</span></div>
+                        <div class="cal-day"><span class="cal-day-num">18</span></div>
+                        <div class="cal-day"><span class="cal-day-num">19</span></div>
+                        <div class="cal-day"><span class="cal-day-num">20</span><div class="cal-event">Lanzamiento Blog</div></div>
+                        <div class="cal-day"><span class="cal-day-num">21</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- VISTA 5: NOTAS -->
+            <section id="view-notes" class="view-section">
+                <div class="view-header">
+                    <div class="view-title">
+                        <h1>Notas Rápidas (Estilo Notion)</h1>
+                        <p>Ideación libre, borradores rápidos y pendientes del día.</p>
+                    </div>
+                    <button class="btn-primary" onclick="addNote()">
+                        <i class="fa-solid fa-plus"></i> Nueva Nota
+                    </button>
+                </div>
+
+                <div class="notes-container" id="notes-container">
+                    <!-- Notas inyectadas por JS -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- MODAL GENERAL UNIFICADO -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <div class="modal-title" id="modalTitle">Agregar Nuevo Elemento</div>
+            <div id="modalContent">
+                <!-- Contenido dinámico del formulario -->
+            </div>
+            <div class="modal-actions">
+                <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn-primary" onclick="saveModalData()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+       PARTE 3: LÓGICA JAVASCRIPT
+       ========================================== -->
+    <script>
+        // Datos iniciales de ejemplo
+        let state = {
+            ideas: [
+                { id: 1, title: "Carrusel: 5 Errores SEO técnicos en 2026", tag: "Instagram", desc: "Explicar la importancia de los Core Web Vitals móviles y el renderizado JavaScript.", image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=500&auto=format&fit=crop&q=80" },
+                { id: 2, title: "Estrategia de Link Building Orgánico", tag: "SEO On-Page", desc: "Infografía detallada sobre cómo conseguir enlaces de autoridad mediante guest posting.", image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=500&auto=format&fit=crop&q=80" },
+                { id: 3, title: "Guía de Optimización para IA Search (SGE)", tag: "Tendencias", desc: "Cómo estructurar el contenido para aparecer en los motores de búsqueda conversacionales.", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=500&auto=format&fit=crop&q=80" }
+            ],
+            clients: [
+                { id: 1, name: "TechCorp Global", status: "Activo", files: 12 },
+                { id: 2, name: "Moda Sustentable Co.", status: "En Revisión", files: 5 },
+                { id: 3, name: "Finanzas Smart", status: "Estrategia SEO", files: 8 }
+            ],
+            palettes: [
+                { id: 1, name: "Neon Startup", colors: ["#6366f1", "#a855f7", "#ec4899", "#f43f5e"] },
+                { id: 2, name: "Eco Natural", colors: ["#065f46", "#10b981", "#34d399", "#a7f3d0"] },
+                { id: 3, name: "Corporate Dark", colors: ["#0f172a", "#334155", "#64748b", "#cbd5e1"] }
+            ],
+            notes: [
+                { id: 1, text: "Revisar la caida de tráfico orgánico en el cluster de artículos de finanzas para TechCorp." },
+                { id: 2, text: "Ideas para YouTube: ¿Muere el SEO tradicional? Entrevista con expertos." }
+            ]
+        };
+
+        // Cambiar entre vistas del menú
+        function switchView(viewName, element) {
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+            
+            document.getElementById('view-' + viewName).classList.add('active');
+            element.classList.add('active');
+        }
+
+        // Renderizar vistas
+        function renderAll() {
+            renderIdeas();
+            renderClients();
+            renderPalettes();
+            renderNotes();
+        }
+
+        function renderIdeas() {
+            const grid = document.getElementById('ideas-grid');
+            grid.innerHTML = state.ideas.map(item => `
+                <div class="pin-card">
+                    <div class="pin-media" style="background-image: url('${item.image}')"></div>
+                    <div class="pin-content">
+                        <span class="pin-tag">${item.tag}</span>
+                        <div class="pin-title">${item.title}</div>
+                        <div class="pin-desc">${item.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderClients() {
+            const grid = document.getElementById('folders-grid');
+            grid.innerHTML = state.clients.map(c => `
+                <div class="folder-card">
+                    <div class="folder-icon-wrap"><i class="fa-solid fa-folder"></i></div>
+                    <div class="folder-name">${c.name}</div>
+                    <div class="folder-meta"><i class="fa-solid fa-circle" style="font-size: 0.5rem; color: #10b981;"></i> ${c.status} • ${c.files} archivos</div>
+                </div>
+            `).join('');
+        }
+
+        function renderPalettes() {
+            const grid = document.getElementById('palettes-grid');
+            grid.innerHTML = state.palettes.map(p => `
+                <div class="palette-card">
+                    <div class="palette-name">${p.name}</div>
+                    <div class="palette-colors">
+                        ${p.colors.map(col => `<div class="color-swatch" style="background: ${col};" title="${col}"></div>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderNotes() {
+            const container = document.getElementById('notes-container');
+            container.innerHTML = state.notes.map(n => `
+                <div class="note-card">
+                    <textarea>${n.text}</textarea>
+                    <div class="note-footer">
+                        <span>Creado hoy</span>
+                        <i class="fa-solid fa-trash" style="cursor: pointer;" onclick="deleteNote(${n.id})"></i>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Control de Modales
+        let currentModalType = '';
+
+        function openModal(type) {
+            currentModalType = type;
+            const overlay = document.getElementById('modalOverlay');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            overlay.classList.add('open');
+
+            if (type === 'idea') {
+                title.innerText = "Nueva Idea Pinterest";
+                content.innerHTML = `
+                    <div class="form-group"><label>Título</label><input type="text" id="m-title" placeholder="Ej: Reel sobre optimización SEO"></div>
+                    <div class="form-group"><label>Categoría / Tag</label><input type="text" id="m-tag" placeholder="Ej: Instagram / SEO"></div>
+                    <div class="form-group"><label>Descripción</label><textarea id="m-desc" placeholder="Breve resumen de la idea..."></textarea></div>
+                    <div class="form-group"><label>URL Imagen de Portada</label><input type="text" id="m-img" placeholder="https://images.unsplash.com/..."></div>
+                `;
+            } else if (type === 'client') {
+                title.innerText = "Nueva Carpeta de Cliente";
+                content.innerHTML = `
+                    <div class="form-group"><label>Nombre del Cliente o Marca</label><input type="text" id="m-cname" placeholder="Ej: Acme Inc."></div>
+                    <div class="form-group"><label>Estado del Proyecto</label><select id="m-cstatus"><option>Activo</option><option>En Revisión</option><option>Estrategia SEO</option></select></div>
+                `;
+            } else if (type === 'palette') {
+                title.innerText = "Nueva Paleta de Colores";
+                content.innerHTML = `
+                    <div class="form-group"><label>Nombre de la Paleta</label><input type="text" id="m-pname" placeholder="Ej: Dark Minimal"></div>
+                    <div class="form-group"><label>Colores (separados por coma)</label><input type="text" id="m-pcolors" placeholder="#6366f1, #0f172a, #ffffff"></div>
+                `;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('open');
+        }
+
+        function saveModalData() {
+            if (currentModalType === 'idea') {
+                const title = document.getElementById('m-title').value;
+                const tag = document.getElementById('m-tag').value;
+                const desc = document.getElementById('m-desc').value;
+                const image = document.getElementById('m-img').value || "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=500&auto=format&fit=crop&q=80";
+                if(title) state.ideas.unshift({ id: Date.now(), title, tag, desc, image });
+                renderIdeas();
+            } else if (currentModalType === 'client') {
+                const name = document.getElementById('m-cname').value;
+                const status = document.getElementById('m-cstatus').value;
+                if(name) state.clients.unshift({ id: Date.now(), name, status, files: 1 });
+                renderClients();
+            } else if (currentModalType === 'palette') {
+                const name = document.getElementById('m-pname').value;
+                const colorsInput = document.getElementById('m-pcolors').value;
+                const colors = colorsInput ? colorsInput.split(',').map(c => c.trim()) : ["#6366f1", "#cbd5e1"];
+                if(name) state.palettes.unshift({ id: Date.now(), name, colors });
+                renderPalettes();
+            }
+            closeModal();
+        }
+
+        function addNote() {
+            state.notes.unshift({ id: Date.now(), text: "Nueva nota rápida..." });
+            renderNotes();
+        }
+
+        function deleteNote(id) {
+            state.notes = state.notes.filter(n => n.id !== id);
+            renderNotes();
+        }
+
+        // Inicializar renderizado
+        renderAll();
+    </script>
+</body>
+</html>
