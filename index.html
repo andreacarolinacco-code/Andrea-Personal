@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>icrea </title>
+    <title>anto</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -51,7 +51,6 @@
                 <i class="fa-solid fa-magnifying-glass" style="color: var(--purple);"></i>
                 <input type="text" placeholder="Buscar ideas, clientes o notas...">
             </div>
-            <!-- Se ha eliminado el bloque del perfil de usuario (SEO Creator, Plan Pro y Avatar) -->
         </header>
 
         <div class="content-body">
@@ -114,7 +113,7 @@
 
                 <div class="calendar-wrapper">
                     <div style="font-weight: 800; font-size: 1.25rem; color: var(--text-main);">Octubre 2026</div>
-                    <div class="calendar-grid">
+                    <div class="calendar-grid" id="calendar-grid">
                         <div class="cal-header-day">Lun</div>
                         <div class="cal-header-day">Mar</div>
                         <div class="cal-header-day">Mié</div>
@@ -122,44 +121,7 @@
                         <div class="cal-header-day">Vie</div>
                         <div class="cal-header-day">Sáb</div>
                         <div class="cal-header-day">Dom</div>
-                        
-                        <!-- Octubre 2026 empieza en Jueves: 3 espacios vacíos previos (Lun, Mar, Mié) -->
-                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
-                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
-                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
-
-                        <!-- Días del mes -->
-                        <div class="cal-day"><span class="cal-day-num">1</span></div>
-                        <div class="cal-day"><span class="cal-day-num">2</span></div>
-                        <div class="cal-day"><span class="cal-day-num">3</span><div class="cal-event">Auditoría SEO</div></div>
-                        <div class="cal-day"><span class="cal-day-num">4</span></div>
-                        <div class="cal-day"><span class="cal-day-num">5</span></div>
-                        <div class="cal-day"><span class="cal-day-num">6</span></div>
-                        <div class="cal-day"><span class="cal-day-num">7</span></div>
-                        <div class="cal-day"><span class="cal-day-num">8</span><div class="cal-event">Post Reel</div></div>
-                        <div class="cal-day"><span class="cal-day-num">9</span></div>
-                        <div class="cal-day"><span class="cal-day-num">10</span></div>
-                        <div class="cal-day"><span class="cal-day-num">11</span></div>
-                        <div class="cal-day"><span class="cal-day-num">12</span></div>
-                        <div class="cal-day"><span class="cal-day-num">13</span><div class="cal-event">Keyword Research</div></div>
-                        <div class="cal-day"><span class="cal-day-num">14</span></div>
-                        <div class="cal-day"><span class="cal-day-num">15</span></div>
-                        <div class="cal-day"><span class="cal-day-num">16</span></div>
-                        <div class="cal-day"><span class="cal-day-num">17</span></div>
-                        <div class="cal-day"><span class="cal-day-num">18</span></div>
-                        <div class="cal-day"><span class="cal-day-num">19</span></div>
-                        <div class="cal-day"><span class="cal-day-num">20</span><div class="cal-event">Lanzamiento Blog</div></div>
-                        <div class="cal-day"><span class="cal-day-num">21</span></div>
-                        <div class="cal-day"><span class="cal-day-num">22</span></div>
-                        <div class="cal-day"><span class="cal-day-num">23</span></div>
-                        <div class="cal-day"><span class="cal-day-num">24</span></div>
-                        <div class="cal-day"><span class="cal-day-num">25</span></div>
-                        <div class="cal-day"><span class="cal-day-num">26</span></div>
-                        <div class="cal-day"><span class="cal-day-num">27</span></div>
-                        <div class="cal-day"><span class="cal-day-num">28</span></div>
-                        <div class="cal-day"><span class="cal-day-num">29</span></div>
-                        <div class="cal-day"><span class="cal-day-num">30</span></div>
-                        <div class="cal-day"><span class="cal-day-num">31</span></div>
+                        <!-- Los días se renderizan dinámicamente desde JavaScript para soportar eventos personalizados -->
                     </div>
                 </div>
             </section>

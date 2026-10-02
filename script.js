@@ -17,6 +17,12 @@ let state = {
     notes: [
         { id: 1, text: "Revisar la caída de tráfico orgánico en el cluster de artículos de finanzas para TechCorp." },
         { id: 2, text: "Ideas para YouTube: ¿Muere el SEO tradicional? Entrevista con expertos." }
+    ],
+    events: [
+        { day: 3, title: "Auditoría SEO" },
+        { day: 8, title: "Post Reel" },
+        { day: 13, title: "Keyword Research" },
+        { day: 20, title: "Lanzamiento Blog" }
     ]
 };
 
@@ -33,6 +39,7 @@ function renderAll() {
     renderClients();
     renderPalettes();
     renderNotes();
+    renderCalendar();
 }
 
 function renderIdeas() {
@@ -85,6 +92,43 @@ function renderNotes() {
     `).join('');
 }
 
+function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    if (!grid) return;
+
+    // Encabezados de días de la semana
+    let html = `
+        <div class="cal-header-day">Lun</div>
+        <div class="cal-header-day">Mar</div>
+        <div class="cal-header-day">Mié</div>
+        <div class="cal-header-day">Jue</div>
+        <div class="cal-header-day">Vie</div>
+        <div class="cal-header-day">Sáb</div>
+        <div class="cal-header-day">Dom</div>
+    `;
+
+    // Octubre 2026 empieza en Jueves (3 días vacíos antes del 1)
+    for (let i = 0; i < 3; i++) {
+        html += `<div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>`;
+    }
+
+    // Días del 1 al 31 de Octubre 2026
+    for (let d = 1; d <= 31; d++) {
+        // Buscar eventos para este día
+        const dayEvents = state.events.filter(e => e.day === d);
+        let eventsHtml = dayEvents.map(e => `<div class="cal-event">${e.title}</div>`).join('');
+
+        html += `
+            <div class="cal-day">
+                <span class="cal-day-num">${d}</span>
+                ${eventsHtml}
+            </div>
+        `;
+    }
+
+    grid.innerHTML = html;
+}
+
 let currentModalType = '';
 
 function openModal(type) {
@@ -115,6 +159,12 @@ function openModal(type) {
             <div class="form-group"><label>Nombre de la Paleta</label><input type="text" id="m-pname" placeholder="Ej: Neon Glow"></div>
             <div class="form-group"><label>Colores (separados por coma)</label><input type="text" id="m-pcolors" placeholder="#38bdf8, #8b5cf6, #f472b6"></div>
         `;
+    } else if (type === 'event') {
+        title.innerText = "Programar Cita / Evento";
+        content.innerHTML = `
+            <div class="form-group"><label>Título del Evento</label><input type="text" id="m-etitle" placeholder="Ej: Reunión con cliente"></div>
+            <div class="form-group"><label>Día del mes (1 - 31)</label><input type="number" id="m-eday" min="1" max="31" placeholder="Ej: 15"></div>
+        `;
     }
 }
 
@@ -141,6 +191,13 @@ function saveModalData() {
         const colors = colorsInput ? colorsInput.split(',').map(c => c.trim()) : ["#38bdf8", "#8b5cf6", "#f472b6"];
         if(name) state.palettes.unshift({ id: Date.now(), name, colors });
         renderPalettes();
+    } else if (currentModalType === 'event') {
+        const title = document.getElementById('m-etitle').value;
+        const day = parseInt(document.getElementById('m-eday').value);
+        if(title && day >= 1 && day <= 31) {
+            state.events.push({ day, title });
+            renderCalendar();
+        }
     }
     closeModal();
 }

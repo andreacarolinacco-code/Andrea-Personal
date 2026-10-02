@@ -1,15 +1,13 @@
-/* ==========================================
-   ICREA DESIGN SYSTEM: Azul Cielo, Rosado Bebé & Morado
-   ========================================== */
+
 :root {
-    /* Colores Base */
+
     --bg-main: #f8fafc;
     --bg-sidebar: #ffffff;
     --bg-card: #ffffff;
     --text-main: #0f172a;
     --text-muted: #64748b;
     
-    /* Paleta principal solicitada */
+
     --sky-blue: #38bdf8;
     --sky-light: #e0f2fe;
     --baby-pink: #f472b6;
@@ -18,7 +16,7 @@
     --purple-dark: #7c3aed;
     --purple-light: #f5f3ff;
     
-    /* Gradientes Temáticos */
+
     --grad-primary: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
     --grad-accent: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
     --grad-card-glow: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(244, 114, 182, 0.1));
