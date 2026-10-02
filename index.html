@@ -48,13 +48,14 @@
     <main>
         <header>
             <div class="search-bar">
-                <i class="fa-solid fa-magnifying-glass" style="color: var(--purple);"></i>
+                <i class="fa-solid fa-magnifying-glass" style="color: var(--pink-main);"></i>
                 <input type="text" placeholder="Buscar ideas, clientes o notas...">
             </div>
         </header>
 
         <div class="content-body">
             
+            <!-- VISTA IDEAS -->
             <section id="view-ideas" class="view-section active">
                 <div class="view-header">
                     <div class="view-title">
@@ -70,8 +71,9 @@
                 </div>
             </section>
 
+            <!-- VISTA CLIENTES -->
             <section id="view-clients" class="view-section">
-                <div class="view-header">
+                <div class="view-header" id="clients-header">
                     <div class="view-title">
                         <h1>Carpetas de Clientes</h1>
                         <p>Organiza estrategias, keywords y auditorías por cada marca.</p>
@@ -85,6 +87,7 @@
                 </div>
             </section>
 
+            <!-- VISTA PALETAS -->
             <section id="view-palettes" class="view-section">
                 <div class="view-header">
                     <div class="view-title">
@@ -100,6 +103,7 @@
                 </div>
             </section>
 
+            <!-- VISTA CALENDARIO -->
             <section id="view-calendar" class="view-section">
                 <div class="view-header">
                     <div class="view-title">
@@ -121,11 +125,11 @@
                         <div class="cal-header-day">Vie</div>
                         <div class="cal-header-day">Sáb</div>
                         <div class="cal-header-day">Dom</div>
-                        <!-- Los días se renderizan dinámicamente desde JavaScript para soportar eventos personalizados -->
                     </div>
                 </div>
             </section>
 
+            <!-- VISTA NOTAS -->
             <section id="view-notes" class="view-section">
                 <div class="view-header">
                     <div class="view-title">
@@ -144,6 +148,7 @@
         </div>
     </main>
 
+    <!-- MODAL GENERAL -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-box">
             <div class="modal-title" id="modalTitle">Agregar Nuevo Elemento</div>
