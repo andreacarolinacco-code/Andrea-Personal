@@ -85,7 +85,7 @@ function renderClients() {
     const header = document.getElementById('clients-header');
 
     if (currentClientOpen !== null) {
-        // Vista de detalle de la carpeta de cliente
+
         const client = state.clients.find(c => c.id === currentClientOpen);
         if (!client) return;
 
@@ -135,7 +135,7 @@ function renderClients() {
             </div>
         `;
     } else {
-        // Vista general de todas las carpetas
+
         header.innerHTML = `
             <div class="view-title">
                 <h1>Carpetas de Clientes</h1>
@@ -238,7 +238,7 @@ function openModal(type) {
     if (type === 'idea') {
         title.innerText = "Nueva Idea Pinterest";
         content.innerHTML = `
-            <div class="form-group"><label>Título</label><input type="text" id="m-title" placeholder="Ej: Reel sobre optimización SEO"></div>
+            <div class="form-group"><label>Título</label><input type="text" id="m-title" placeholder="Ej: Reel sobre..."></div>
             <div class="form-group"><label>Categoría / Tag</label><input type="text" id="m-tag" placeholder="Ej: Instagram / SEO"></div>
             <div class="form-group"><label>Descripción</label><textarea id="m-desc" placeholder="Breve resumen de la idea..."></textarea></div>
             <div class="form-group"><label>URL Imagen de Portada</label><input type="text" id="m-img" placeholder="https://images.unsplash.com/..."></div>
@@ -246,19 +246,19 @@ function openModal(type) {
     } else if (type === 'client') {
         title.innerText = "Nueva Carpeta de Cliente";
         content.innerHTML = `
-            <div class="form-group"><label>Nombre del Cliente o Marca</label><input type="text" id="m-cname" placeholder="Ej: Acme Inc."></div>
+            <div class="form-group"><label>Nombre del Cliente o Marca</label><input type="text" id="m-cname" placeholder="Ej: Andrea... "></div>
             <div class="form-group"><label>Estado del Proyecto</label><select id="m-cstatus"><option>Activo</option><option>En Revisión</option><option>Estrategia SEO</option></select></div>
         `;
     } else if (type === 'palette') {
         title.innerText = "Nueva Paleta de Colores";
         content.innerHTML = `
-            <div class="form-group"><label>Nombre de la Paleta</label><input type="text" id="m-pname" placeholder="Ej: Rose Gold"></div>
+            <div class="form-group"><label>Nombre de la Paleta</label><input type="text" id="m-pname" placeholder="Ej: Azul Rey... "></div>
             <div class="form-group"><label>Colores (separados por coma)</label><input type="text" id="m-pcolors" placeholder="#f472b6, #fb7185, #fbcfe8"></div>
         `;
     } else if (type === 'event') {
         title.innerText = "Programar Cita / Evento";
         content.innerHTML = `
-            <div class="form-group"><label>Título del Evento</label><input type="text" id="m-etitle" placeholder="Ej: Reunión con cliente"></div>
+            <div class="form-group"><label>Título del Evento</label><input type="text" id="m-etitle" placeholder="Ej: Reunión con cliente... "></div>
             <div class="form-group"><label>Día del mes (1 - 31)</label><input type="number" id="m-eday" min="1" max="31" placeholder="Ej: 15"></div>
         `;
     } else if (type === 'client-img') {

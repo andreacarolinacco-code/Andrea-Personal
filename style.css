@@ -4,7 +4,7 @@
     --bg-card: #ffffff;
     --border: #fce7f3;
     
-    /* Tonos Rosados refinados */
+
     --pink-main: #f472b6;
     --pink-soft: #fdf2f8;
     --pink-hover: #db2777;
@@ -319,7 +319,7 @@ header {
     line-height: 1.5;
 }
 
-/* FOLDERS GRID (CLIENTES) */
+
 .folders-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -373,7 +373,7 @@ header {
     font-weight: 500;
 }
 
-/* PALETTES GRID */
+
 .palettes-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -419,7 +419,7 @@ header {
     flex: 2.5;
 }
 
-/* CALENDAR */
+
 .calendar-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border);
@@ -477,7 +477,7 @@ header {
     box-shadow: 0 3px 8px rgba(0,0,0,0.04);
 }
 
-/* NOTES CONTAINER */
+
 .notes-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
