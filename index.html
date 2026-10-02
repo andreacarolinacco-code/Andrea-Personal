@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>icrea </title>
-    <!-- Google Fonts & FontAwesome -->
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Estilos CSS separados -->
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 
     <aside>
         <div>
@@ -43,10 +42,8 @@
         </div>
 
         <div style="font-size: 0.8rem; color: var(--text-muted); text-align: center; padding-top: 16px; border-top: 1px solid var(--border); font-weight: 600;">
-
         </div>
     </aside>
-
 
     <main>
         <header>
@@ -54,20 +51,11 @@
                 <i class="fa-solid fa-magnifying-glass" style="color: var(--purple);"></i>
                 <input type="text" placeholder="Buscar ideas, clientes o notas...">
             </div>
-            <div class="user-profile">
-                <div style="text-align: right;">
-                    <div style="font-size: 1rem; font-weight: 800;">SEO Creator</div>
-                    <div style="font-size: 0.75rem; color: #db2777; font-weight: 800;">Plan Pro </div>
-                </div>
-                <div class="avatar">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar">
-                </div>
-            </div>
+            <!-- Se ha eliminado el bloque del perfil de usuario (SEO Creator, Plan Pro y Avatar) -->
         </header>
 
         <div class="content-body">
             
-
             <section id="view-ideas" class="view-section active">
                 <div class="view-header">
                     <div class="view-title">
@@ -80,10 +68,8 @@
                 </div>
 
                 <div class="pinterest-grid" id="ideas-grid">
-
                 </div>
             </section>
-
 
             <section id="view-clients" class="view-section">
                 <div class="view-header">
@@ -97,10 +83,8 @@
                 </div>
 
                 <div class="folders-grid" id="folders-grid">
-
                 </div>
             </section>
-
 
             <section id="view-palettes" class="view-section">
                 <div class="view-header">
@@ -114,10 +98,8 @@
                 </div>
 
                 <div class="palettes-grid" id="palettes-grid">
-
                 </div>
             </section>
-
 
             <section id="view-calendar" class="view-section">
                 <div class="view-header">
@@ -141,7 +123,12 @@
                         <div class="cal-header-day">Sáb</div>
                         <div class="cal-header-day">Dom</div>
                         
+                        <!-- Octubre 2026 empieza en Jueves: 3 espacios vacíos previos (Lun, Mar, Mié) -->
+                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
+                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
+                        <div class="cal-day" style="opacity: 0.3; background: transparent; border: none;"></div>
 
+                        <!-- Días del mes -->
                         <div class="cal-day"><span class="cal-day-num">1</span></div>
                         <div class="cal-day"><span class="cal-day-num">2</span></div>
                         <div class="cal-day"><span class="cal-day-num">3</span><div class="cal-event">Auditoría SEO</div></div>
@@ -149,7 +136,7 @@
                         <div class="cal-day"><span class="cal-day-num">5</span></div>
                         <div class="cal-day"><span class="cal-day-num">6</span></div>
                         <div class="cal-day"><span class="cal-day-num">7</span></div>
-                        <div class="cal-day"><span class="cal-day-num">8</span><div class="cal-event">Post Reel/div></div>
+                        <div class="cal-day"><span class="cal-day-num">8</span><div class="cal-event">Post Reel</div></div>
                         <div class="cal-day"><span class="cal-day-num">9</span></div>
                         <div class="cal-day"><span class="cal-day-num">10</span></div>
                         <div class="cal-day"><span class="cal-day-num">11</span></div>
@@ -163,10 +150,19 @@
                         <div class="cal-day"><span class="cal-day-num">19</span></div>
                         <div class="cal-day"><span class="cal-day-num">20</span><div class="cal-event">Lanzamiento Blog</div></div>
                         <div class="cal-day"><span class="cal-day-num">21</span></div>
+                        <div class="cal-day"><span class="cal-day-num">22</span></div>
+                        <div class="cal-day"><span class="cal-day-num">23</span></div>
+                        <div class="cal-day"><span class="cal-day-num">24</span></div>
+                        <div class="cal-day"><span class="cal-day-num">25</span></div>
+                        <div class="cal-day"><span class="cal-day-num">26</span></div>
+                        <div class="cal-day"><span class="cal-day-num">27</span></div>
+                        <div class="cal-day"><span class="cal-day-num">28</span></div>
+                        <div class="cal-day"><span class="cal-day-num">29</span></div>
+                        <div class="cal-day"><span class="cal-day-num">30</span></div>
+                        <div class="cal-day"><span class="cal-day-num">31</span></div>
                     </div>
                 </div>
             </section>
-
 
             <section id="view-notes" class="view-section">
                 <div class="view-header">
@@ -180,19 +176,16 @@
                 </div>
 
                 <div class="notes-container" id="notes-container">
-
                 </div>
             </section>
 
         </div>
     </main>
 
-
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-box">
             <div class="modal-title" id="modalTitle">Agregar Nuevo Elemento</div>
             <div id="modalContent">
-
             </div>
             <div class="modal-actions">
                 <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
@@ -200,7 +193,6 @@
             </div>
         </div>
     </div>
-
 
     <script src="script.js"></script>
 </body>
